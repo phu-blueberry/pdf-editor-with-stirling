@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as pdfjsLib from "pdfjs-lib";
 
 // PDF.js internal modules
@@ -11,7 +11,7 @@ import "../display/stubs.js";
 import "../display/stubs.js";
 
 // Web UI components from PDF.js
-import './alt_text_manager.js';
+import "./alt_text_manager.js";
 import "./annotation_editor_params.js";
 import "./download_manager.js";
 import "./genericcom.js";
@@ -57,6 +57,71 @@ const AppComp = () => {
     });
     await renderTask.promise;
   };
+
+  function createPDFBlob(content) {
+    const blob = new Blob([content], { type: "application/pdf" });
+    return blob;
+  }
+
+  const [selectedFiles, setSelectedFiles] = useState([]);
+
+  const onFileChange = (event) => {
+    if (event.target.files.length >= 2) {
+      setSelectedFiles([event.target.files[0], event.target.files[1]]);
+    } else {
+      alert("Please select at least two PDF files.");
+    }
+  };
+
+  async function mergePDFs() {
+    if (selectedFiles.length < 2) {
+      alert("Please select two PDF files before merging.");
+      return;
+    }
+
+    const url = "http://localhost:8080/api/v1/general/merge-pdfs";
+    const formData = new FormData();
+
+    // Append selected files to formData
+    formData.append("fileInput", selectedFiles[0], selectedFiles[0].name);
+    formData.append("fileInput", selectedFiles[1], selectedFiles[1].name);
+
+    // Set headers and cookies
+    const headers = new Headers({
+      Accept: "*/*",
+      "Accept-Language": "en-US,en;q=0.9",
+    });
+
+    try {
+      // Fetch API call
+      const response = await fetch(url, {
+        method: "POST",
+        headers: headers,
+        body: formData,
+        // credentials: 'include', // Ensure cookies are included
+      });
+
+      console.log("response", response);
+
+      if (response.ok) {
+        const blob = await response.blob(); // Process the response as a Blob directly
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "merged_pdf.pdf"; // Provide a default filename for the download
+        document.body.appendChild(a); // Append the link to the document
+        a.click(); // Simulate a click on the link to download the file
+
+        // Cleanup: remove the link and revoke the URL
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      } else {
+        console.error("Failed to merge PDFs:", response.status);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
 
   useEffect(() => {
     // loadFile();
@@ -550,6 +615,29 @@ const AppComp = () => {
                         </button>
                       </div>
                     </div>
+                  </div>
+                  <div
+                    id="editorMergeTools"
+                    class="toolbarButtonWithContainer"
+                    style={{ display: "flex" }}
+                  >
+                    <input
+                      type="file"
+                      accept="application/pdf"
+                      multiple
+                      onChange={onFileChange}
+                    />
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        mergePDFs();
+                      }}
+                      style={{
+                        width: "100px",
+                      }}
+                    >
+                      Merge 2 pdf
+                    </button>
                   </div>
                   <div id="editorHighlight" class="toolbarButtonWithContainer">
                     <button
