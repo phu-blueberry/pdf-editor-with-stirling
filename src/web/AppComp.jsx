@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as pdfjsLib from "pdfjs-lib";
+import { PDFDocument as PDFLibDocument } from 'pdf-lib';
 
 // PDF.js internal modules
 import "../display/cmap_reader_factory.js";
@@ -36,12 +37,42 @@ const worker = new URL("pdfjs-lib/build/pdf.worker.mjs", import.meta.url).href;
 pdfjsLib.GlobalWorkerOptions.workerSrc = worker;
 import "../web/viewer.css";
 
-import monkeyTrace from "../../test/pdfs/tracemonkey.pdf";
+export const GLOBAL_PDFJS_WORKER_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs'
+
+async function createAndLoadPDF() {
+  // Create a new PDF document
+  const pdfDoc = await PDFLibDocument.create();
+  const page = pdfDoc.addPage();
+  const { width, height } = page.getSize();
+  const fontSize = 30;
+  page.drawText('Hello, world!', {
+    x: 50,
+    y: height - 4 * fontSize,
+    size: fontSize,
+  });
+
+  // Serialize the PDFDocument to bytes (a Uint8Array)
+  const pdfBytes = await pdfDoc.save();
+
+  // Convert Uint8Array to Blob (for PDF.js to load)
+  const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+  const blobUrl = URL.createObjectURL(blob);
+  return blobUrl
+}
+
+const loadPdfJs = async () => {
+  const { GlobalWorkerOptions, getDocument } = await import('pdfjs-dist')
+  GlobalWorkerOptions.workerSrc = GLOBAL_PDFJS_WORKER_URL
+  return { getDocument }
+}
+
 
 const AppComp = () => {
   const loadFile = async () => {
     // Loading a document.
-    const loadingTask = pdfjsLib.getDocument(monkeyTrace);
+    const {getDocument} = await loadPdfJs()
+    const blobPDF = await createAndLoadPDF()
+    const loadingTask = getDocument(blobPDF);
     const pdfDocument = await loadingTask.promise;
     // Request a first page
     const pdfPage = await pdfDocument.getPage(1);
@@ -124,7 +155,7 @@ const AppComp = () => {
   }
 
   useEffect(() => {
-    // loadFile();
+    loadFile();
   }, []);
 
   return (
@@ -224,6 +255,8 @@ const AppComp = () => {
         </div>
         <div id="sidebarResizer"></div>
       </div>
+      
+      <canvas id="theCanvas"></canvas>
 
       <div id="mainContainer">
         <div class="toolbar">
