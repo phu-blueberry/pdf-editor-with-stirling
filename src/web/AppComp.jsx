@@ -11,7 +11,7 @@ import "../display/stubs.js";
 import "../display/stubs.js";
 
 // Web UI components from PDF.js
-import './alt_text_manager.js';
+import "./alt_text_manager.js";
 import "./annotation_editor_params.js";
 import "./download_manager.js";
 import "./genericcom.js";
@@ -54,7 +54,7 @@ const AppComp = () => {
     const ctx = canvas.getContext("2d");
     const renderTask = pdfPage.render({
       canvasContext: ctx,
-      viewport,
+      viewport
     });
     await renderTask.promise;
   };
@@ -133,7 +133,10 @@ const AppComp = () => {
           </div>
 
           <div id="toolbarSidebarRight">
-            <div id="outlineOptionsContainer" className="toolbarHorizontalGroup">
+            <div
+              id="outlineOptionsContainer"
+              className="toolbarHorizontalGroup"
+            >
               <div className="verticalToolbarSeparator"></div>
 
               <button
@@ -199,7 +202,10 @@ const AppComp = () => {
                     className="hidden doorHanger toolbarHorizontalGroup"
                     id="findbar"
                   >
-                    <div id="findInputContainer" className="toolbarHorizontalGroup">
+                    <div
+                      id="findInputContainer"
+                      className="toolbarHorizontalGroup"
+                    >
                       <span className="loadingInput end toolbarHorizontalGroup">
                         <input
                           id="findInput"
@@ -308,7 +314,10 @@ const AppComp = () => {
                       className="toolbarHorizontalGroup"
                       aria-live="polite"
                     >
-                      <span id="findResultsCount" className="toolbarLabel"></span>
+                      <span
+                        id="findResultsCount"
+                        className="toolbarLabel"
+                      ></span>
                       <span id="findMsg" className="toolbarLabel"></span>
                     </div>
                   </div>
@@ -383,7 +392,10 @@ const AppComp = () => {
                     </span>
                   </button>
                 </div>
-                <span id="scaleSelectContainer" className="dropdownToolbarButton">
+                <span
+                  id="scaleSelectContainer"
+                  className="dropdownToolbarButton"
+                >
                   <select
                     id="scaleSelect"
                     title="Zoom"
@@ -533,7 +545,10 @@ const AppComp = () => {
                       className="editorParamsToolbar hidden doorHangerRight menu"
                       id="editorSignatureParamsToolbar"
                     >
-                      <div id="addSignatureDoorHanger" className="menuContainer">
+                      <div
+                        id="addSignatureDoorHanger"
+                        className="menuContainer"
+                      >
                         <button
                           id="editorSignatureAddSignature"
                           className="toolbarButton labeled"
@@ -552,7 +567,10 @@ const AppComp = () => {
                       </div>
                     </div>
                   </div>
-                  <div id="editorHighlight" className="toolbarButtonWithContainer">
+                  <div
+                    id="editorHighlight"
+                    className="toolbarButtonWithContainer"
+                  >
                     <button
                       id="editorHighlightButton"
                       className="toolbarButton"
@@ -635,7 +653,10 @@ const AppComp = () => {
                       </div>
                     </div>
                   </div>
-                  <div id="editorFreeText" className="toolbarButtonWithContainer">
+                  <div
+                    id="editorFreeText"
+                    className="toolbarButtonWithContainer"
+                  >
                     <button
                       id="editorFreeTextButton"
                       className="toolbarButton"
