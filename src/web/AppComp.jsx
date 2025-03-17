@@ -32,6 +32,7 @@ import "./pdf_print_service.js";
 import "./secondary_toolbar.js";
 import "./signature_manager.js";
 import "./toolbar.js";
+import './viewer.js'
 
 const worker = new URL("pdfjs-lib/build/pdf.worker.mjs", import.meta.url).href;
 pdfjsLib.GlobalWorkerOptions.workerSrc = worker;
@@ -255,9 +256,6 @@ const AppComp = () => {
         </div>
         <div id="sidebarResizer"></div>
       </div>
-      
-      <canvas id="theCanvas"></canvas>
-
       <div id="mainContainer">
         <div class="toolbar">
           <div id="toolbarContainer">
@@ -1312,6 +1310,7 @@ const AppComp = () => {
           <div id="viewer" class="pdfViewer"></div>
         </div>
       </div>
+      
     </div>
   );
 };

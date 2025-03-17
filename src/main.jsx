@@ -1,4 +1,3 @@
-
 import AppComp from "./web/AppComp";
 
 import React from "react";

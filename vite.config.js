@@ -6,7 +6,7 @@ const defineAlias = ({ mode }) => {
     CHROME: mode === "chrome",
     GENERIC: mode === "generic",
     MOZCENTRAL: mode === "mozcentral",
-    GECKOVIEW: mode === "geckoview"
+    GECKOVIEW: mode === "geckoview",
   };
 
   const libraryAlias = {
@@ -16,7 +16,7 @@ const defineAlias = ({ mode }) => {
     "display-fetch_stream": "src/display/stubs.js",
     "display-network": "src/display/stubs.js",
     "display-node_stream": "src/display/stubs.js",
-    "display-node_utils": "src/display/stubs.js"
+    "display-node_utils": "src/display/stubs.js",
   };
 
   const viewerAlias = {
@@ -39,7 +39,7 @@ const defineAlias = ({ mode }) => {
     "web-print_service": "",
     "web-secondary_toolbar": "src/web/secondary_toolbar.js",
     "web-signature_manager": "src/web/signature_manager.js",
-    "web-toolbar": "src/web/toolbar.js"
+    "web-toolbar": "src/web/toolbar.js",
   };
 
   if (defines.CHROME) {
@@ -75,7 +75,7 @@ const defineAlias = ({ mode }) => {
   } else if (defines.MOZCENTRAL) {
     if (defines.GECKOVIEW) {
       const gvAlias = {
-        "web-toolbar": "web/toolbar-geckoview.js"
+        "web-toolbar": "web/toolbar-geckoview.js",
       };
       for (const key in viewerAlias) {
         viewerAlias[key] = gvAlias[key] || "web/stubs-geckoview.js";
@@ -94,14 +94,14 @@ const defineAlias = ({ mode }) => {
         ...Object.fromEntries(
           Object.entries({
             ...libraryAlias,
-            ...viewerAlias
+            ...viewerAlias,
           }).map(([key, value]) => [
             key,
-            value ? path.resolve(__dirname, value) : ""
-          ])
-        )
-      }
-    }
+            value ? path.resolve(__dirname, value) : "",
+          ]),
+        ),
+      },
+    },
   };
 };
 
@@ -116,55 +116,54 @@ export default defineConfig(() => {
         "pdfjs-lib": path.resolve(__dirname, "src/pdf.js"),
         "display-cmap_reader_factory": path.resolve(
           new URL(".", import.meta.url).pathname,
-          "src/display/cmap_reader_factory.js"
+          "src/display/cmap_reader_factory.js",
         ),
         "display-standard_fontdata_factory": path.resolve(
           __dirname,
-          "src/display/standard_fontdata_factory.js"
+          "src/display/standard_fontdata_factory.js",
         ),
         "display-wasm_factory": path.resolve(
           new URL(".", import.meta.url).pathname,
-          "src/display/wasm_factory.js"
+          "src/display/wasm_factory.js",
         ),
         "display-fetch_stream": path.resolve(
           new URL(".", import.meta.url).pathname,
-          "src/display/fetch_stream.js"
+          "src/display/fetch_stream.js",
         ),
         "display-network": path.resolve(
           new URL(".", import.meta.url).pathname,
-          "src/display/network.js"
+          "src/display/network.js",
         ),
         "display-node_stream": path.resolve(
           new URL(".", import.meta.url).pathname,
-          "src/display/node_stream.js"
+          "src/display/node_stream.js",
         ),
         "display-node_utils": path.resolve(
           __dirname,
-          "src/display/node_utils.js"
+          "src/display/node_utils.js",
         ),
         "fluent-bundle": path.resolve(
           new URL(".", import.meta.url).pathname,
-          "../../../node_modules/@fluent/bundle/esm/index.js"
+          "../../../node_modules/@fluent/bundle/esm/index.js",
         ),
         "fluent-dom": path.resolve(
           new URL(".", import.meta.url).pathname,
-          "../../../node_modules/@fluent/dom/esm/index.js"
+          "../../../node_modules/@fluent/dom/esm/index.js",
         ),
         "web-null_l10n": path.resolve(
           new URL("..", import.meta.url).pathname,
-          "./web/genericl10n.js"
-        )
-      }
+          "./web/genericl10n.js",
+        ),
+      },
     },
     build: {
       rollupOptions: {
         output: {
           manualChunks: {
-            "pdf.worker": ["pdfjs-dist/build/pdf.worker"]
-          }
-        }
-      }
-    }
+            "pdf.worker": ["pdfjs-dist/build/pdf.worker"],
+          },
+        },
+      },
+    },
   };
 });
-
