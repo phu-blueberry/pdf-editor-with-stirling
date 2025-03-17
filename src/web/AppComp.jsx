@@ -32,7 +32,7 @@ import "./pdf_print_service.js";
 import "./secondary_toolbar.js";
 import "./signature_manager.js";
 import "./toolbar.js";
-import './viewer.js'
+// import './viewer.js'
 
 const worker = new URL("pdfjs-lib/build/pdf.worker.mjs", import.meta.url).href;
 pdfjsLib.GlobalWorkerOptions.workerSrc = worker;
