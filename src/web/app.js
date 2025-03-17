@@ -93,7 +93,6 @@ import { SecondaryToolbar } from "web-secondary_toolbar";
 import { SignatureManager } from "web-signature_manager";
 import { Toolbar } from "web-toolbar";
 import { ViewHistory } from "./view_history.js";
-
 const FORCE_PAGES_LOADED_TIMEOUT = 10000; // ms
 
 const ViewOnLoad = {
@@ -297,7 +296,7 @@ const PDFViewerApplication = {
         GlobalWorkerOptions.workerSrc ||= AppOptions.get("workerSrc");
 
         if (typeof PDFJSDev === "undefined") {
-          globalThis.pdfjsWorker = await import("pdfjs/pdf.worker.js");
+          globalThis.pdfjsWorker = await import("../pdf.worker.js");
         } else {
           await __non_webpack_import__(PDFWorker.workerSrc);
         }

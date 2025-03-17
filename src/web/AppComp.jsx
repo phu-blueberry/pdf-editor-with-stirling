@@ -31,6 +31,7 @@ import "./pdf_print_service.js";
 import "./secondary_toolbar.js";
 import "./signature_manager.js";
 import "./toolbar.js";
+import "./viewer.js";
 
 const worker = new URL("pdfjs-lib/build/pdf.worker.mjs", import.meta.url).href;
 pdfjsLib.GlobalWorkerOptions.workerSrc = worker;
@@ -65,19 +66,19 @@ const AppComp = () => {
   return (
     <div id="outerContainer">
       <div id="sidebarContainer">
-        <div id="toolbarSidebar" class="toolbarHorizontalGroup">
+        <div id="toolbarSidebar" className="toolbarHorizontalGroup">
           <div id="toolbarSidebarLeft">
             <div
               id="sidebarViewButtons"
-              class="toolbarHorizontalGroup toggled"
+              className="toolbarHorizontalGroup toggled"
               role="radiogroup"
             >
               <button
                 id="viewThumbnail"
-                class="toolbarButton toggled"
+                className="toolbarButton toggled"
                 type="button"
                 title="Show Thumbnails"
-                tabindex="0"
+                tabIndex="0"
                 data-l10n-id="pdfjs-thumbs-button"
                 role="radio"
                 aria-checked="true"
@@ -87,10 +88,10 @@ const AppComp = () => {
               </button>
               <button
                 id="viewOutline"
-                class="toolbarButton"
+                className="toolbarButton"
                 type="button"
                 title="Show Document Outline (double-click to expand/collapse all items)"
-                tabindex="0"
+                tabIndex="0"
                 data-l10n-id="pdfjs-document-outline-button"
                 role="radio"
                 aria-checked="false"
@@ -102,10 +103,10 @@ const AppComp = () => {
               </button>
               <button
                 id="viewAttachments"
-                class="toolbarButton"
+                className="toolbarButton"
                 type="button"
                 title="Show Attachments"
-                tabindex="0"
+                tabIndex="0"
                 data-l10n-id="pdfjs-attachments-button"
                 role="radio"
                 aria-checked="false"
@@ -117,10 +118,10 @@ const AppComp = () => {
               </button>
               <button
                 id="viewLayers"
-                class="toolbarButton"
+                className="toolbarButton"
                 type="button"
                 title="Show Layers (double-click to reset all layers to the default state)"
-                tabindex="0"
+                tabIndex="0"
                 data-l10n-id="pdfjs-layers-button"
                 role="radio"
                 aria-checked="false"
@@ -132,16 +133,16 @@ const AppComp = () => {
           </div>
 
           <div id="toolbarSidebarRight">
-            <div id="outlineOptionsContainer" class="toolbarHorizontalGroup">
-              <div class="verticalToolbarSeparator"></div>
+            <div id="outlineOptionsContainer" className="toolbarHorizontalGroup">
+              <div className="verticalToolbarSeparator"></div>
 
               <button
                 id="currentOutlineItem"
-                class="toolbarButton"
+                className="toolbarButton"
                 type="button"
                 disabled="disabled"
                 title="Find Current Outline Item"
-                tabindex="0"
+                tabIndex="0"
                 data-l10n-id="pdfjs-current-outline-item-button"
               >
                 <span data-l10n-id="pdfjs-current-outline-item-button-label">
@@ -153,24 +154,24 @@ const AppComp = () => {
         </div>
         <div id="sidebarContent">
           <div id="thumbnailView"></div>
-          <div id="outlineView" class="hidden"></div>
-          <div id="attachmentsView" class="hidden"></div>
-          <div id="layersView" class="hidden"></div>
+          <div id="outlineView" className="hidden"></div>
+          <div id="attachmentsView" className="hidden"></div>
+          <div id="layersView" className="hidden"></div>
         </div>
         <div id="sidebarResizer"></div>
       </div>
 
       <div id="mainContainer">
-        <div class="toolbar">
+        <div className="toolbar">
           <div id="toolbarContainer">
-            <div id="toolbarViewer" class="toolbarHorizontalGroup">
-              <div id="toolbarViewerLeft" class="toolbarHorizontalGroup">
+            <div id="toolbarViewer" className="toolbarHorizontalGroup">
+              <div id="toolbarViewerLeft" className="toolbarHorizontalGroup">
                 <button
                   id="sidebarToggleButton"
-                  class="toolbarButton"
+                  className="toolbarButton"
                   type="button"
                   title="Toggle Sidebar"
-                  tabindex="0"
+                  tabIndex="0"
                   data-l10n-id="pdfjs-toggle-sidebar-button"
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -180,14 +181,14 @@ const AppComp = () => {
                     Toggle Sidebar
                   </span>
                 </button>
-                <div class="toolbarButtonSpacer"></div>
-                <div class="toolbarButtonWithContainer">
+                <div className="toolbarButtonSpacer"></div>
+                <div className="toolbarButtonWithContainer">
                   <button
                     id="viewFindButton"
-                    class="toolbarButton"
+                    className="toolbarButton"
                     type="button"
                     title="Find in Document"
-                    tabindex="0"
+                    tabIndex="0"
                     data-l10n-id="pdfjs-findbar-button"
                     aria-expanded="false"
                     aria-controls="findbar"
@@ -195,41 +196,41 @@ const AppComp = () => {
                     <span data-l10n-id="pdfjs-findbar-button-label">Find</span>
                   </button>
                   <div
-                    class="hidden doorHanger toolbarHorizontalGroup"
+                    className="hidden doorHanger toolbarHorizontalGroup"
                     id="findbar"
                   >
-                    <div id="findInputContainer" class="toolbarHorizontalGroup">
-                      <span class="loadingInput end toolbarHorizontalGroup">
+                    <div id="findInputContainer" className="toolbarHorizontalGroup">
+                      <span className="loadingInput end toolbarHorizontalGroup">
                         <input
                           id="findInput"
-                          class="toolbarField"
+                          className="toolbarField"
                           title="Find"
                           placeholder="Find in document…"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-find-input"
                           aria-invalid="false"
                         />
                       </span>
-                      <div class="toolbarHorizontalGroup">
+                      <div className="toolbarHorizontalGroup">
                         <button
                           id="findPreviousButton"
-                          class="toolbarButton"
+                          className="toolbarButton"
                           type="button"
                           title="Find the previous occurrence of the phrase"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-find-previous-button"
                         >
                           <span data-l10n-id="pdfjs-find-previous-button-label">
                             Previous
                           </span>
                         </button>
-                        <div class="splitToolbarButtonSeparator"></div>
+                        <div className="splitToolbarButtonSeparator"></div>
                         <button
                           id="findNextButton"
-                          class="toolbarButton"
+                          className="toolbarButton"
                           type="button"
                           title="Find the next occurrence of the phrase"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-find-next-button"
                         >
                           <span data-l10n-id="pdfjs-find-next-button-label">
@@ -241,13 +242,13 @@ const AppComp = () => {
 
                     <div
                       id="findbarOptionsOneContainer"
-                      class="toolbarHorizontalGroup"
+                      className="toolbarHorizontalGroup"
                     >
-                      <div class="toggleButton toolbarLabel">
+                      <div className="toggleButton toolbarLabel">
                         <input
                           type="checkbox"
                           id="findHighlightAll"
-                          tabindex="0"
+                          tabIndex="0"
                         />
                         <label
                           for="findHighlightAll"
@@ -256,11 +257,11 @@ const AppComp = () => {
                           Highlight All
                         </label>
                       </div>
-                      <div class="toggleButton toolbarLabel">
+                      <div className="toggleButton toolbarLabel">
                         <input
                           type="checkbox"
                           id="findMatchCase"
-                          tabindex="0"
+                          tabIndex="0"
                         />
                         <label
                           for="findMatchCase"
@@ -272,13 +273,13 @@ const AppComp = () => {
                     </div>
                     <div
                       id="findbarOptionsTwoContainer"
-                      class="toolbarHorizontalGroup"
+                      className="toolbarHorizontalGroup"
                     >
-                      <div class="toggleButton toolbarLabel">
+                      <div className="toggleButton toolbarLabel">
                         <input
                           type="checkbox"
                           id="findMatchDiacritics"
-                          tabindex="0"
+                          tabIndex="0"
                         />
                         <label
                           for="findMatchDiacritics"
@@ -287,11 +288,11 @@ const AppComp = () => {
                           Match Diacritics
                         </label>
                       </div>
-                      <div class="toggleButton toolbarLabel">
+                      <div className="toggleButton toolbarLabel">
                         <input
                           type="checkbox"
                           id="findEntireWord"
-                          tabindex="0"
+                          tabIndex="0"
                         />
                         <label
                           for="findEntireWord"
@@ -304,77 +305,77 @@ const AppComp = () => {
 
                     <div
                       id="findbarMessageContainer"
-                      class="toolbarHorizontalGroup"
+                      className="toolbarHorizontalGroup"
                       aria-live="polite"
                     >
-                      <span id="findResultsCount" class="toolbarLabel"></span>
-                      <span id="findMsg" class="toolbarLabel"></span>
+                      <span id="findResultsCount" className="toolbarLabel"></span>
+                      <span id="findMsg" className="toolbarLabel"></span>
                     </div>
                   </div>
                 </div>
-                <div class="toolbarHorizontalGroup hiddenSmallView">
+                <div className="toolbarHorizontalGroup hiddenSmallView">
                   <button
-                    class="toolbarButton"
+                    className="toolbarButton"
                     title="Previous Page"
                     type="button"
                     id="previous"
-                    tabindex="0"
+                    tabIndex="0"
                     data-l10n-id="pdfjs-previous-button"
                   >
                     <span data-l10n-id="pdfjs-previous-button-label">
                       Previous
                     </span>
                   </button>
-                  <div class="splitToolbarButtonSeparator"></div>
+                  <div className="splitToolbarButtonSeparator"></div>
                   <button
-                    class="toolbarButton"
+                    className="toolbarButton"
                     type="button"
                     title="Next Page"
                     id="next"
-                    tabindex="0"
+                    tabIndex="0"
                     data-l10n-id="pdfjs-next-button"
                   >
                     <span data-l10n-id="pdfjs-next-button-label">Next</span>
                   </button>
                 </div>
-                <div class="toolbarHorizontalGroup">
-                  <span class="loadingInput start toolbarHorizontalGroup">
+                <div className="toolbarHorizontalGroup">
+                  <span className="loadingInput start toolbarHorizontalGroup">
                     <input
                       type="number"
                       id="pageNumber"
-                      class="toolbarField"
+                      className="toolbarField"
                       title="Page"
                       value="1"
                       min="1"
-                      tabindex="0"
+                      tabIndex="0"
                       data-l10n-id="pdfjs-page-input"
-                      autocomplete="off"
+                      autoComplete="off"
                     />
                   </span>
-                  <span id="numPages" class="toolbarLabel"></span>
+                  <span id="numPages" className="toolbarLabel"></span>
                 </div>
               </div>
-              <div id="toolbarViewerMiddle" class="toolbarHorizontalGroup">
-                <div class="toolbarHorizontalGroup">
+              <div id="toolbarViewerMiddle" className="toolbarHorizontalGroup">
+                <div className="toolbarHorizontalGroup">
                   <button
                     id="zoomOutButton"
-                    class="toolbarButton"
+                    className="toolbarButton"
                     type="button"
                     title="Zoom Out"
-                    tabindex="0"
+                    tabIndex="0"
                     data-l10n-id="pdfjs-zoom-out-button"
                   >
                     <span data-l10n-id="pdfjs-zoom-out-button-label">
                       Zoom Out
                     </span>
                   </button>
-                  <div class="splitToolbarButtonSeparator"></div>
+                  <div className="splitToolbarButtonSeparator"></div>
                   <button
                     id="zoomInButton"
-                    class="toolbarButton"
+                    className="toolbarButton"
                     type="button"
                     title="Zoom In"
-                    tabindex="0"
+                    tabIndex="0"
                     data-l10n-id="pdfjs-zoom-in-button"
                   >
                     <span data-l10n-id="pdfjs-zoom-in-button-label">
@@ -382,11 +383,11 @@ const AppComp = () => {
                     </span>
                   </button>
                 </div>
-                <span id="scaleSelectContainer" class="dropdownToolbarButton">
+                <span id="scaleSelectContainer" className="dropdownToolbarButton">
                   <select
                     id="scaleSelect"
                     title="Zoom"
-                    tabindex="0"
+                    tabIndex="0"
                     data-l10n-id="pdfjs-zoom-select"
                   >
                     <option
@@ -500,20 +501,20 @@ const AppComp = () => {
                   </select>
                 </span>
               </div>
-              <div id="toolbarViewerRight" class="toolbarHorizontalGroup">
+              <div id="toolbarViewerRight" className="toolbarHorizontalGroup">
                 <div
                   id="editorModeButtons"
-                  class="toolbarHorizontalGroup"
+                  className="toolbarHorizontalGroup"
                   role="radiogroup"
                 >
                   <div
                     id="editorSignature"
-                    class="toolbarButtonWithContainer"
+                    className="toolbarButtonWithContainer"
                     hidden="true"
                   >
                     <button
                       id="editorSignatureButton"
-                      class="toolbarButton"
+                      className="toolbarButton"
                       type="button"
                       disabled="disabled"
                       title="Add signature"
@@ -521,7 +522,7 @@ const AppComp = () => {
                       aria-expanded="false"
                       aria-haspopup="true"
                       aria-controls="editorSignatureParamsToolbar"
-                      tabindex="0"
+                      tabIndex="0"
                       data-l10n-id="pdfjs-editor-signature-button"
                     >
                       <span data-l10n-id="pdfjs-editor-signature-button-label">
@@ -529,21 +530,21 @@ const AppComp = () => {
                       </span>
                     </button>
                     <div
-                      class="editorParamsToolbar hidden doorHangerRight menu"
+                      className="editorParamsToolbar hidden doorHangerRight menu"
                       id="editorSignatureParamsToolbar"
                     >
-                      <div id="addSignatureDoorHanger" class="menuContainer">
+                      <div id="addSignatureDoorHanger" className="menuContainer">
                         <button
                           id="editorSignatureAddSignature"
-                          class="toolbarButton labeled"
+                          className="toolbarButton labeled"
                           type="button"
                           title="Add new signature"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-editor-signature-add-signature-button"
                         >
                           <span
                             data-l10n-id="pdfjs-editor-signature-add-signature-button-label"
-                            class="editorParamsLabel"
+                            className="editorParamsLabel"
                           >
                             Add new signature
                           </span>
@@ -551,10 +552,10 @@ const AppComp = () => {
                       </div>
                     </div>
                   </div>
-                  <div id="editorHighlight" class="toolbarButtonWithContainer">
+                  <div id="editorHighlight" className="toolbarButtonWithContainer">
                     <button
                       id="editorHighlightButton"
-                      class="toolbarButton"
+                      className="toolbarButton"
                       type="button"
                       disabled="disabled"
                       title="Highlight"
@@ -562,7 +563,7 @@ const AppComp = () => {
                       aria-expanded="false"
                       aria-haspopup="true"
                       aria-controls="editorHighlightParamsToolbar"
-                      tabindex="0"
+                      tabIndex="0"
                       data-l10n-id="pdfjs-editor-highlight-button"
                     >
                       <span data-l10n-id="pdfjs-editor-highlight-button-label">
@@ -570,20 +571,20 @@ const AppComp = () => {
                       </span>
                     </button>
                     <div
-                      class="editorParamsToolbar hidden doorHangerRight"
+                      className="editorParamsToolbar hidden doorHangerRight"
                       id="editorHighlightParamsToolbar"
                     >
                       <div
                         id="highlightParamsToolbarContainer"
-                        class="editorParamsToolbarContainer"
+                        className="editorParamsToolbarContainer"
                       >
                         <div
                           id="editorHighlightColorPicker"
-                          class="colorPicker"
+                          className="colorPicker"
                         >
                           <span
                             id="highlightColorPickerLabel"
-                            class="editorParamsLabel"
+                            className="editorParamsLabel"
                             data-l10n-id="pdfjs-editor-highlight-colorpicker-label"
                           >
                             Highlight color
@@ -592,52 +593,52 @@ const AppComp = () => {
                         <div id="editorHighlightThickness">
                           <label
                             for="editorFreeHighlightThickness"
-                            class="editorParamsLabel"
+                            className="editorParamsLabel"
                             data-l10n-id="pdfjs-editor-free-highlight-thickness-input"
                           >
                             Thickness
                           </label>
-                          <div class="thicknessPicker">
+                          <div className="thicknessPicker">
                             <input
                               type="range"
                               id="editorFreeHighlightThickness"
-                              class="editorParamsSlider"
+                              className="editorParamsSlider"
                               data-l10n-id="pdfjs-editor-free-highlight-thickness-title"
                               value="12"
                               min="8"
                               max="24"
                               step="1"
-                              tabindex="0"
+                              tabIndex="0"
                             />
                           </div>
                         </div>
                         <div id="editorHighlightVisibility">
-                          <div class="divider"></div>
-                          <div class="toggler">
+                          <div className="divider"></div>
+                          <div className="toggler">
                             <label
                               for="editorHighlightShowAll"
-                              class="editorParamsLabel"
+                              className="editorParamsLabel"
                               data-l10n-id="pdfjs-editor-highlight-show-all-button-label"
                             >
                               Show all
                             </label>
                             <button
                               id="editorHighlightShowAll"
-                              class="toggle-button"
+                              className="toggle-button"
                               type="button"
                               data-l10n-id="pdfjs-editor-highlight-show-all-button"
                               aria-pressed="true"
-                              tabindex="0"
+                              tabIndex="0"
                             ></button>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div id="editorFreeText" class="toolbarButtonWithContainer">
+                  <div id="editorFreeText" className="toolbarButtonWithContainer">
                     <button
                       id="editorFreeTextButton"
-                      class="toolbarButton"
+                      className="toolbarButton"
                       type="button"
                       disabled="disabled"
                       title="Text"
@@ -645,7 +646,7 @@ const AppComp = () => {
                       aria-expanded="false"
                       aria-haspopup="true"
                       aria-controls="editorFreeTextParamsToolbar"
-                      tabindex="0"
+                      tabIndex="0"
                       data-l10n-id="pdfjs-editor-free-text-button"
                     >
                       <span data-l10n-id="pdfjs-editor-free-text-button-label">
@@ -653,14 +654,14 @@ const AppComp = () => {
                       </span>
                     </button>
                     <div
-                      class="editorParamsToolbar hidden doorHangerRight"
+                      className="editorParamsToolbar hidden doorHangerRight"
                       id="editorFreeTextParamsToolbar"
                     >
-                      <div class="editorParamsToolbarContainer">
-                        <div class="editorParamsSetter">
+                      <div className="editorParamsToolbarContainer">
+                        <div className="editorParamsSetter">
                           <label
                             for="editorFreeTextColor"
-                            class="editorParamsLabel"
+                            className="editorParamsLabel"
                             data-l10n-id="pdfjs-editor-free-text-color-input"
                           >
                             Color
@@ -668,14 +669,14 @@ const AppComp = () => {
                           <input
                             type="color"
                             id="editorFreeTextColor"
-                            class="editorParamsColor"
-                            tabindex="0"
+                            className="editorParamsColor"
+                            tabIndex="0"
                           />
                         </div>
-                        <div class="editorParamsSetter">
+                        <div className="editorParamsSetter">
                           <label
                             for="editorFreeTextFontSize"
-                            class="editorParamsLabel"
+                            className="editorParamsLabel"
                             data-l10n-id="pdfjs-editor-free-text-size-input"
                           >
                             Size
@@ -683,21 +684,21 @@ const AppComp = () => {
                           <input
                             type="range"
                             id="editorFreeTextFontSize"
-                            class="editorParamsSlider"
+                            className="editorParamsSlider"
                             value="10"
                             min="5"
                             max="100"
                             step="1"
-                            tabindex="0"
+                            tabIndex="0"
                           />
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div id="editorInk" class="toolbarButtonWithContainer">
+                  <div id="editorInk" className="toolbarButtonWithContainer">
                     <button
                       id="editorInkButton"
-                      class="toolbarButton"
+                      className="toolbarButton"
                       type="button"
                       disabled="disabled"
                       title="Draw"
@@ -705,7 +706,7 @@ const AppComp = () => {
                       aria-expanded="false"
                       aria-haspopup="true"
                       aria-controls="editorInkParamsToolbar"
-                      tabindex="0"
+                      tabIndex="0"
                       data-l10n-id="pdfjs-editor-ink-button"
                     >
                       <span data-l10n-id="pdfjs-editor-ink-button-label">
@@ -713,14 +714,14 @@ const AppComp = () => {
                       </span>
                     </button>
                     <div
-                      class="editorParamsToolbar hidden doorHangerRight"
+                      className="editorParamsToolbar hidden doorHangerRight"
                       id="editorInkParamsToolbar"
                     >
-                      <div class="editorParamsToolbarContainer">
-                        <div class="editorParamsSetter">
+                      <div className="editorParamsToolbarContainer">
+                        <div className="editorParamsSetter">
                           <label
                             for="editorInkColor"
-                            class="editorParamsLabel"
+                            className="editorParamsLabel"
                             data-l10n-id="pdfjs-editor-ink-color-input"
                           >
                             Color
@@ -728,14 +729,14 @@ const AppComp = () => {
                           <input
                             type="color"
                             id="editorInkColor"
-                            class="editorParamsColor"
-                            tabindex="0"
+                            className="editorParamsColor"
+                            tabIndex="0"
                           />
                         </div>
-                        <div class="editorParamsSetter">
+                        <div className="editorParamsSetter">
                           <label
                             for="editorInkThickness"
-                            class="editorParamsLabel"
+                            className="editorParamsLabel"
                             data-l10n-id="pdfjs-editor-ink-thickness-input"
                           >
                             Thickness
@@ -743,18 +744,18 @@ const AppComp = () => {
                           <input
                             type="range"
                             id="editorInkThickness"
-                            class="editorParamsSlider"
+                            className="editorParamsSlider"
                             value="1"
                             min="1"
                             max="20"
                             step="1"
-                            tabindex="0"
+                            tabIndex="0"
                           />
                         </div>
-                        <div class="editorParamsSetter">
+                        <div className="editorParamsSetter">
                           <label
                             for="editorInkOpacity"
-                            class="editorParamsLabel"
+                            className="editorParamsLabel"
                             data-l10n-id="pdfjs-editor-ink-opacity-input"
                           >
                             Opacity
@@ -762,21 +763,21 @@ const AppComp = () => {
                           <input
                             type="range"
                             id="editorInkOpacity"
-                            class="editorParamsSlider"
+                            className="editorParamsSlider"
                             value="1"
                             min="0.05"
                             max="1"
                             step="0.05"
-                            tabindex="0"
+                            tabIndex="0"
                           />
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div id="editorStamp" class="toolbarButtonWithContainer">
+                  <div id="editorStamp" className="toolbarButtonWithContainer">
                     <button
                       id="editorStampButton"
-                      class="toolbarButton"
+                      className="toolbarButton"
                       type="button"
                       disabled="disabled"
                       title="Add or edit images"
@@ -784,7 +785,7 @@ const AppComp = () => {
                       aria-expanded="false"
                       aria-haspopup="true"
                       aria-controls="editorStampParamsToolbar"
-                      tabindex="0"
+                      tabIndex="0"
                       data-l10n-id="pdfjs-editor-stamp-button"
                     >
                       <span data-l10n-id="pdfjs-editor-stamp-button-label">
@@ -792,20 +793,20 @@ const AppComp = () => {
                       </span>
                     </button>
                     <div
-                      class="editorParamsToolbar hidden doorHangerRight menu"
+                      className="editorParamsToolbar hidden doorHangerRight menu"
                       id="editorStampParamsToolbar"
                     >
-                      <div class="menuContainer">
+                      <div className="menuContainer">
                         <button
                           id="editorStampAddImage"
-                          class="toolbarButton labeled"
+                          className="toolbarButton labeled"
                           type="button"
                           title="Add image"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-editor-stamp-add-image-button"
                         >
                           <span
-                            class="editorParamsLabel"
+                            className="editorParamsLabel"
                             data-l10n-id="pdfjs-editor-stamp-add-image-button-label"
                           >
                             Add image
@@ -818,16 +819,16 @@ const AppComp = () => {
 
                 <div
                   id="editorModeSeparator"
-                  class="verticalToolbarSeparator"
+                  className="verticalToolbarSeparator"
                 ></div>
 
-                <div class="toolbarHorizontalGroup hiddenMediumView">
+                <div className="toolbarHorizontalGroup hiddenMediumView">
                   <button
                     id="printButton"
-                    class="toolbarButton"
+                    className="toolbarButton"
                     type="button"
                     title="Print"
-                    tabindex="0"
+                    tabIndex="0"
                     data-l10n-id="pdfjs-print-button"
                   >
                     <span data-l10n-id="pdfjs-print-button-label">Print</span>
@@ -835,28 +836,28 @@ const AppComp = () => {
 
                   <button
                     id="downloadButton"
-                    class="toolbarButton"
+                    className="toolbarButton"
                     type="button"
                     title="Save"
-                    tabindex="0"
+                    tabIndex="0"
                     data-l10n-id="pdfjs-save-button"
                   >
                     <span data-l10n-id="pdfjs-save-button-label">Save</span>
                   </button>
                 </div>
 
-                <div class="verticalToolbarSeparator hiddenMediumView"></div>
+                <div className="verticalToolbarSeparator hiddenMediumView"></div>
 
                 <div
                   id="secondaryToolbarToggle"
-                  class="toolbarButtonWithContainer"
+                  className="toolbarButtonWithContainer"
                 >
                   <button
                     id="secondaryToolbarToggleButton"
-                    class="toolbarButton"
+                    className="toolbarButton"
                     type="button"
                     title="Tools"
-                    tabindex="0"
+                    tabIndex="0"
                     data-l10n-id="pdfjs-tools-button"
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -866,18 +867,18 @@ const AppComp = () => {
                   </button>
                   <div
                     id="secondaryToolbar"
-                    class="hidden doorHangerRight menu"
+                    className="hidden doorHangerRight menu"
                   >
                     <div
                       id="secondaryToolbarButtonContainer"
-                      class="menuContainer"
+                      className="menuContainer"
                     >
                       <button
                         id="secondaryOpenFile"
-                        class="toolbarButton labeled"
+                        className="toolbarButton labeled"
                         type="button"
                         title="Open File"
-                        tabindex="0"
+                        tabIndex="0"
                         data-l10n-id="pdfjs-open-file-button"
                       >
                         <span data-l10n-id="pdfjs-open-file-button-label">
@@ -885,13 +886,13 @@ const AppComp = () => {
                         </span>
                       </button>
 
-                      <div class="visibleMediumView">
+                      <div className="visibleMediumView">
                         <button
                           id="secondaryPrint"
-                          class="toolbarButton labeled"
+                          className="toolbarButton labeled"
                           type="button"
                           title="Print"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-print-button"
                         >
                           <span data-l10n-id="pdfjs-print-button-label">
@@ -901,10 +902,10 @@ const AppComp = () => {
 
                         <button
                           id="secondaryDownload"
-                          class="toolbarButton labeled"
+                          className="toolbarButton labeled"
                           type="button"
                           title="Save"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-save-button"
                         >
                           <span data-l10n-id="pdfjs-save-button-label">
@@ -912,17 +913,17 @@ const AppComp = () => {
                           </span>
                         </button>
 
-                        <div class="horizontalToolbarSeparator"></div>
+                        <div className="horizontalToolbarSeparator"></div>
                       </div>
 
-                      <div class="horizontalToolbarSeparator"></div>
+                      <div className="horizontalToolbarSeparator"></div>
 
                       <button
                         id="presentationMode"
-                        class="toolbarButton labeled"
+                        className="toolbarButton labeled"
                         type="button"
                         title="Switch to Presentation Mode"
-                        tabindex="0"
+                        tabIndex="0"
                         data-l10n-id="pdfjs-presentation-mode-button"
                       >
                         <span data-l10n-id="pdfjs-presentation-mode-button-label">
@@ -933,9 +934,9 @@ const AppComp = () => {
                       <a
                         href="#"
                         id="viewBookmark"
-                        class="toolbarButton labeled"
+                        className="toolbarButton labeled"
                         title="Current Page (View URL from Current Page)"
-                        tabindex="0"
+                        tabIndex="0"
                         data-l10n-id="pdfjs-bookmark-button"
                       >
                         <span data-l10n-id="pdfjs-bookmark-button-label">
@@ -945,15 +946,15 @@ const AppComp = () => {
 
                       <div
                         id="viewBookmarkSeparator"
-                        class="horizontalToolbarSeparator"
+                        className="horizontalToolbarSeparator"
                       ></div>
 
                       <button
                         id="firstPage"
-                        class="toolbarButton labeled"
+                        className="toolbarButton labeled"
                         type="button"
                         title="Go to First Page"
-                        tabindex="0"
+                        tabIndex="0"
                         data-l10n-id="pdfjs-first-page-button"
                       >
                         <span data-l10n-id="pdfjs-first-page-button-label">
@@ -962,10 +963,10 @@ const AppComp = () => {
                       </button>
                       <button
                         id="lastPage"
-                        class="toolbarButton labeled"
+                        className="toolbarButton labeled"
                         type="button"
                         title="Go to Last Page"
-                        tabindex="0"
+                        tabIndex="0"
                         data-l10n-id="pdfjs-last-page-button"
                       >
                         <span data-l10n-id="pdfjs-last-page-button-label">
@@ -973,14 +974,14 @@ const AppComp = () => {
                         </span>
                       </button>
 
-                      <div class="horizontalToolbarSeparator"></div>
+                      <div className="horizontalToolbarSeparator"></div>
 
                       <button
                         id="pageRotateCw"
-                        class="toolbarButton labeled"
+                        className="toolbarButton labeled"
                         type="button"
                         title="Rotate Clockwise"
-                        tabindex="0"
+                        tabIndex="0"
                         data-l10n-id="pdfjs-page-rotate-cw-button"
                       >
                         <span data-l10n-id="pdfjs-page-rotate-cw-button-label">
@@ -989,10 +990,10 @@ const AppComp = () => {
                       </button>
                       <button
                         id="pageRotateCcw"
-                        class="toolbarButton labeled"
+                        className="toolbarButton labeled"
                         type="button"
                         title="Rotate Counterclockwise"
-                        tabindex="0"
+                        tabIndex="0"
                         data-l10n-id="pdfjs-page-rotate-ccw-button"
                       >
                         <span data-l10n-id="pdfjs-page-rotate-ccw-button-label">
@@ -1000,15 +1001,15 @@ const AppComp = () => {
                         </span>
                       </button>
 
-                      <div class="horizontalToolbarSeparator"></div>
+                      <div className="horizontalToolbarSeparator"></div>
 
                       <div id="cursorToolButtons" role="radiogroup">
                         <button
                           id="cursorSelectTool"
-                          class="toolbarButton labeled toggled"
+                          className="toolbarButton labeled toggled"
                           type="button"
                           title="Enable Text Selection Tool"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-cursor-text-select-tool-button"
                           role="radio"
                           aria-checked="true"
@@ -1019,10 +1020,10 @@ const AppComp = () => {
                         </button>
                         <button
                           id="cursorHandTool"
-                          class="toolbarButton labeled"
+                          className="toolbarButton labeled"
                           type="button"
                           title="Enable Hand Tool"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-cursor-hand-tool-button"
                           role="radio"
                           aria-checked="false"
@@ -1033,15 +1034,15 @@ const AppComp = () => {
                         </button>
                       </div>
 
-                      <div class="horizontalToolbarSeparator"></div>
+                      <div className="horizontalToolbarSeparator"></div>
 
                       <div id="scrollModeButtons" role="radiogroup">
                         <button
                           id="scrollPage"
-                          class="toolbarButton labeled"
+                          className="toolbarButton labeled"
                           type="button"
                           title="Use Page Scrolling"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-scroll-page-button"
                           role="radio"
                           aria-checked="false"
@@ -1052,10 +1053,10 @@ const AppComp = () => {
                         </button>
                         <button
                           id="scrollVertical"
-                          class="toolbarButton labeled toggled"
+                          className="toolbarButton labeled toggled"
                           type="button"
                           title="Use Vertical Scrolling"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-scroll-vertical-button"
                           role="radio"
                           aria-checked="true"
@@ -1066,10 +1067,10 @@ const AppComp = () => {
                         </button>
                         <button
                           id="scrollHorizontal"
-                          class="toolbarButton labeled"
+                          className="toolbarButton labeled"
                           type="button"
                           title="Use Horizontal Scrolling"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-scroll-horizontal-button"
                           role="radio"
                           aria-checked="false"
@@ -1080,10 +1081,10 @@ const AppComp = () => {
                         </button>
                         <button
                           id="scrollWrapped"
-                          class="toolbarButton labeled"
+                          className="toolbarButton labeled"
                           type="button"
                           title="Use Wrapped Scrolling"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-scroll-wrapped-button"
                           role="radio"
                           aria-checked="false"
@@ -1094,15 +1095,15 @@ const AppComp = () => {
                         </button>
                       </div>
 
-                      <div class="horizontalToolbarSeparator"></div>
+                      <div className="horizontalToolbarSeparator"></div>
 
                       <div id="spreadModeButtons" role="radiogroup">
                         <button
                           id="spreadNone"
-                          class="toolbarButton labeled toggled"
+                          className="toolbarButton labeled toggled"
                           type="button"
                           title="Do not join page spreads"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-spread-none-button"
                           role="radio"
                           aria-checked="true"
@@ -1113,10 +1114,10 @@ const AppComp = () => {
                         </button>
                         <button
                           id="spreadOdd"
-                          class="toolbarButton labeled"
+                          className="toolbarButton labeled"
                           type="button"
                           title="Join page spreads starting with odd-numbered pages"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-spread-odd-button"
                           role="radio"
                           aria-checked="false"
@@ -1127,10 +1128,10 @@ const AppComp = () => {
                         </button>
                         <button
                           id="spreadEven"
-                          class="toolbarButton labeled"
+                          className="toolbarButton labeled"
                           type="button"
                           title="Join page spreads starting with even-numbered pages"
-                          tabindex="0"
+                          tabIndex="0"
                           data-l10n-id="pdfjs-spread-even-button"
                           role="radio"
                           aria-checked="false"
@@ -1143,14 +1144,14 @@ const AppComp = () => {
 
                       <div
                         id="imageAltTextSettingsSeparator"
-                        class="horizontalToolbarSeparator hidden"
+                        className="horizontalToolbarSeparator hidden"
                       ></div>
                       <button
                         id="imageAltTextSettings"
                         type="button"
-                        class="toolbarButton labeled hidden"
+                        className="toolbarButton labeled hidden"
                         title="Image alt text settings"
-                        tabindex="0"
+                        tabIndex="0"
                         data-l10n-id="pdfjs-image-alt-text-settings-button"
                         aria-controls="altTextSettingsDialog"
                       >
@@ -1159,14 +1160,14 @@ const AppComp = () => {
                         </span>
                       </button>
 
-                      <div class="horizontalToolbarSeparator"></div>
+                      <div className="horizontalToolbarSeparator"></div>
 
                       <button
                         id="documentProperties"
-                        class="toolbarButton labeled"
+                        className="toolbarButton labeled"
                         type="button"
                         title="Document Properties…"
-                        tabindex="0"
+                        tabIndex="0"
                         data-l10n-id="pdfjs-document-properties-button"
                         aria-controls="documentPropertiesDialog"
                       >
@@ -1180,15 +1181,15 @@ const AppComp = () => {
               </div>
             </div>
             <div id="loadingBar">
-              <div class="progress">
-                <div class="glimmer"></div>
+              <div className="progress">
+                <div className="glimmer"></div>
               </div>
             </div>
           </div>
         </div>
 
-        <div id="viewerContainer" tabindex="0">
-          <div id="viewer" class="pdfViewer"></div>
+        <div id="viewerContainer" tabIndex="0">
+          <div id="viewer" className="pdfViewer"></div>
         </div>
       </div>
     </div>
