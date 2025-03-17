@@ -53,7 +53,7 @@ const AppComp = () => {
     const ctx = canvas.getContext("2d");
     const renderTask = pdfPage.render({
       canvasContext: ctx,
-      viewport,
+      viewport
     });
     await renderTask.promise;
   };
