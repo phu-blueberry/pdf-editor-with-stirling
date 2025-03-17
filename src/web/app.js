@@ -297,7 +297,7 @@ const PDFViewerApplication = {
         GlobalWorkerOptions.workerSrc ||= AppOptions.get("workerSrc");
 
         if (typeof PDFJSDev === "undefined") {
-          globalThis.pdfjsWorker = await import("pdfjs/pdf.worker.js");
+          globalThis.pdfjsWorker = await import("../pdf.worker.js");
         } else {
           await __non_webpack_import__(PDFWorker.workerSrc);
         }
